@@ -1,176 +1,773 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./Website/assets/images/logo.png" type="image/x-icon" id="favicon">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="Jalal Naveed — AI Ethics & Quantum Leadership. Human-centric AI, responsible deployment, and quantum strategy.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.youtube.com; upgrade-insecure-requests;">
+    <title>Jalal Naveed | AI Ethics & Quantum Leadership</title>
 
-    <title>Jalal Naveed</title>
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
-    <!-- Style Sheet-->
-    <link rel="stylesheet" href="./Website/assets/scss/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600;800&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #050508;
+            --bg-panel: rgba(25, 25, 40, 0.6);
+            --accent-purple: #9d4edd;
+            --accent-gold: #ffd60a;
+            --accent-blue: #4cc9f0;
+            --text-main: #ffffff;
+            --text-muted: #b0b0c0;
+            --font-display: 'Exo 2', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        #ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
+        }
+
+        h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 2px; }
+
+        .hero-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            background: linear-gradient(to right, #fff, var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent-blue);
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: clamp(50px, 10vw, 100px) 0;
+        }
+
+        /* --- NAV (mobile-first) --- */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-main);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(15px, 3vw, 30px);
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-purple);
+            text-shadow: 0 0 10px var(--accent-purple);
+        }
+
+        .btn-premium {
+            display: inline-block;
+            padding: clamp(12px, 2vw, 15px) clamp(24px, 4vw, 40px);
+            background: linear-gradient(45deg, rgba(157, 78, 221, 0.1), rgba(76, 201, 240, 0.1));
+            border: 1px solid var(--accent-purple);
+            color: white;
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.4s;
+            letter-spacing: 2px;
+            border-radius: 4px;
+        }
+
+        .btn-premium:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px var(--accent-purple);
+            border-color: transparent;
+        }
+
+        #hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(20px, 4vw, 32px);
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .hero-photo {
+            width: clamp(100px, 28vw, 160px);
+            height: clamp(100px, 28vw, 160px);
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            border: 3px solid rgba(157, 78, 221, 0.4);
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .hero-photo-fallback {
+            width: clamp(100px, 28vw, 160px);
+            height: clamp(100px, 28vw, 160px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            color: rgba(255,255,255,0.9);
+            border: 3px solid rgba(157, 78, 221, 0.4);
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .quantum-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(120px, 32vw, 190px);
+            height: clamp(120px, 32vw, 190px);
+            margin-top: calc(-1 * clamp(120px, 32vw, 190px) / 2);
+            margin-left: calc(-1 * clamp(120px, 32vw, 190px) / 2);
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg-deep), var(--bg-deep)) padding-box,
+                linear-gradient(135deg, var(--accent-purple), var(--accent-blue), var(--accent-gold), var(--accent-purple)) border-box;
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            opacity: 0.65;
+            animation: aura-pulse 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes aura-pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-desc {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
+        }
+
+        /* --- GRID: mobile 1 col, then 2, then 4 --- */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 560px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        }
+
+        @media (min-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        .card {
+            background: var(--bg-panel);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: clamp(20px, 4vw, 30px);
+            border-radius: 12px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-purple);
+            opacity: 0.5;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: clamp(0.95rem, 2vw, 1rem);
+        }
+
+        .media-container {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+            background: #000;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .media-container iframe {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Shorts-style vertical feed (mobile-first: vertical on all sizes) */
+        .media-container.shorts-feed {
+            max-width: 340px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .media-container.shorts-feed iframe {
+            aspect-ratio: 9/16;
+            min-height: 280px;
+        }
+
+        .channel-card h3 { margin-bottom: 6px; }
+        .channel-card .channel-tagline {
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .embed-fallback-hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            text-align: center;
+        }
+        .embed-fallback-hint a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .embed-fallback-hint a:hover { text-decoration: underline; }
+        .channel-link-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+        }
+        .channel-direct-link {
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .channel-direct-link:hover {
+            background: rgba(76, 201, 240, 0.15);
+            text-decoration: none;
+        }
+        .channel-card .watch-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .channel-card .watch-link:hover { text-decoration: underline; }
+
+        /* --- VAULT --- */
+        #contact { text-align: center; }
+
+        .vault-door {
+            background: rgba(20, 20, 35, 0.8);
+            backdrop-filter: blur(20px);
+            padding: clamp(28px, 5vw, 50px);
+            border: 1px solid var(--accent-gold);
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .vault-lock-icon {
+            font-size: clamp(2.2rem, 6vw, 3rem);
+            margin-bottom: 20px;
+            background: linear-gradient(var(--accent-gold), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .challenge-box {
+            background: rgba(255,255,255,0.05);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px dashed var(--accent-purple);
+        }
+
+        .challenge-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--accent-purple);
+            color: white;
+            width: 64px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+        }
+
+        .challenge-input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .hidden-data {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 1s ease;
+        }
+
+        .data-item {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--accent-blue);
+            background: rgba(76, 201, 240, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+            font-family: var(--font-display);
+            border: 1px solid var(--accent-blue);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: clamp(28px, 5vw, 40px);
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: clamp(0.95rem, 2vw, 1rem);
+        }
+
+        .social-buttons {
+            text-align: center;
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .social-buttons .btn-premium { margin-left: 0; }
+
+        @media (max-width: 559px) {
+            nav { flex-direction: column; text-align: center; }
+            .nav-links { width: 100%; }
+        }
+    </style>
 </head>
-
 <body>
-    <nav class="navbar">
-        <a href="https://www.linkedin.com/in/jalalnaveed/" class="navbar__link">About</a>
-        <a href="#projects" class="navbar__link">Projects</a>
-        <a href="https://www.youtube.com/channel/UCjbCbxjOFMat-D_lZ8atgcg" class="navbar__link">Games</a>
-        <a href="https://www.youtube.com/channel/UCNft3KKtMNVS1JLCooZWqMw" class="navbar__link">Youtube</a>
-        <a href="https://app.pluralsight.com/profile/jalal-syednaveed" class="navbar__link">Portfolio</a>
-        <a href="https://koji.to/nidospartan" class="navbar__link">VideoChat</a>
-        <a href="#contact" class="navbar__link">Contact</a>
-    </nav>
 
+    <div id="ambient-bg"></div>
 
+    <div class="container">
+        <nav>
+            <a href="#" class="nav-logo">JALAL NAVEED</a>
+            <div class="nav-links">
+                <a href="#vision">Vision</a>
+                <a href="#explorations">Explorations</a>
+                <a href="#media">Media</a>
+                <a href="#contact">Connect</a>
+            </div>
+        </nav>
 
-    <header class="section" data-color="dark">
-        <image src="./Website/assets/images/logo.png" alt="JN" class="logo">
-            <label for="hamburger">
-                <input type="checkbox" name="hamburger" id="hamburger">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <section id="hero">
+            <div class="hero-inner">
+                <div class="hero-photo-wrap">
+                    <span class="quantum-aura" aria-hidden="true"></span>
+                    <img src="me.jpg" alt="Jalal Naveed" class="hero-photo" width="160" height="160" loading="eager" onerror="this.onerror=null;this.style.display='none';var s=document.getElementById('hero-photo-fallback');if(s){s.classList.add('hero-photo-fallback');s.style.display='flex';}">
+                    <span id="hero-photo-fallback" style="display:none;" aria-hidden="true">JN</span>
                 </div>
-            </label>
-            <div class="title-container">
-                <h2 class="sub-title top">A Tech Geek</h2>
-                <h1 class="title"></h1>
-                <span class="dark">Naveed</span>
-                <span class="primary">Jalal</span>
-
-                <!-- <h1>Jalal Naveed</h1> -->
-
-                <h2 class="sub-title bottom">A Passionate Engineer</h2>
-            </div>
-
-    </header>
-
-    <section class="section" id="about" data-color="light">
-        <h2 class="heading">About</h2>
-        <div class="content">
-            <p>
-                Hello There !. My Name is <strong>Jalal</strong>,
-                I'm a <strong>Developer</strong> from <strong>Finland.</strong>.
-                I like to develop <strong>Websites</strong> and <strong>MobileApps</strong>
-                Coding is my <strong>Passion</strong> and <strong>Hobby</strong>. I also
-                love making desktop apps with <strong>Python</strong> and <strong>JSElectron.</strong>
-                I am also working on <strong>Games</strong> to make during my free time.
-                I also host my own <strong>VPS</strong> with multiple web <strong>Projects.</strong>
-            </p>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-
-        <div class="social-media-icons">
-            <a href="https://www.youtube.com/@nidospartan" class="fa fa-youtube"><div class="icon youtube"></div></a>
-            <a href="https://www.facebook.com/naveed.jalal" class="fa fa-facebook"><div class="icon facebook"></div></a>
-            <a href="https://www.linkedin.com/in/jalalnaveed/" class="fa fa-linkedin"><div class="icon linkedin"></div></a>
-            <a href="https://www.tiktok.com/@nidospartan" class="fa fa-tiktok"><div class="icon tiktok"></div></a>
-        </div>
-    </section>
-
-    <section class="section" id="projects" data-color="light">
-
-        <h2 class="heading">Projects</h2>
-
-        <div class="project-grid">
-
-            <div class="project col-2">
-                <div class="image" style="background-image: url('./Website/assets/images/projects/Tenserflow.png')">
+                <div>
+                    <div class="subtitle" id="hero-subtitle">AI Thought Leader</div>
+                    <h1 class="hero-title" id="hero-title">THE FUTURE IS NOW</h1>
+                    <p class="hero-desc" id="hero-desc">
+                        Exploring the intersection of Artificial Intelligence, Human Potential, and Quantum Concepts.
+                        I use AI tools to build, stream, and inspire.
+                    </p>
+                    <br>
+                    <a href="#media" class="btn-premium" id="hero-btn">View My Work</a>
                 </div>
-                <h3 href="#" class="isProject">Machine Learning-Tenserflow</h3>
+            </div>
+        </section>
+
+        <section id="vision">
+            <h2 class="section-heading" id="vision-heading">VISION</h2>
+            <div class="grid" id="vision-grid"></div>
+        </section>
+
+        <section id="media">
+            <h2 class="section-heading" id="media-heading">LATEST BROADCASTS</h2>
+            <p class="section-sub" id="media-sub">My channels — AI & Quantum, Digital Media, Gaming, Fitness & more.</p>
+            <div class="grid" id="media-channels-grid"></div>
+            <div class="social-buttons">
+                <a href="" target="_blank" rel="noopener noreferrer" id="tiktok-link" class="btn-premium" style="padding: 10px 25px; font-size: 0.9rem;">Follow on TikTok</a>
+                <a href="" target="_blank" rel="noopener noreferrer" id="pluralsight-link" class="btn-premium" style="padding: 10px 25px; font-size: 0.9rem; border-color: #fff;">Pluralsight Profile</a>
+            </div>
+        </section>
+
+        <section id="explorations">
+            <h2 class="section-heading" id="explorations-heading">EXPLORATIONS</h2>
+            <div class="grid" id="explorations-grid"></div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-heading" id="contact-heading">SECURE CONNECTION</h2>
+
+            <div class="vault-door" id="vault-lock">
+                <div class="vault-lock-icon">🔐</div>
+                <h3 style="color: var(--accent-gold);" id="lock-title">Private Access</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;" id="lock-msg">
+                    To protect my privacy from automated spam bots, please complete this simple security check to reveal my contact details.
+                </p>
+                <div class="challenge-box">
+                    <span style="color: white; font-size: 1.5rem;" id="math-num1">0</span>
+                    <span style="color: var(--accent-purple); font-size: 1.5rem;">+</span>
+                    <span style="color: white; font-size: 1.5rem;" id="math-num2">0</span>
+                    <span style="color: white; font-size: 1.5rem;">=</span>
+                    <input type="number" id="user-answer" class="challenge-input" placeholder="?" inputmode="numeric" autocomplete="off" aria-label="Answer">
+                </div>
+                <button type="button" class="btn-premium" style="width: 100%;" id="lock-btn">Verify & Unlock</button>
+                <p id="error-msg" style="color: #ff4d4d; margin-top: 15px; display: none; font-size: 0.9rem;">Access Denied: Incorrect Answer</p>
             </div>
 
-            <div class="project col-2 row-2">
-                <div class="image" style="background-image: url('./Website/assets/images/projects/djangoecom.png')">
+            <div id="vault-unlocked" class="hidden-data">
+                <h3 style="color: var(--accent-gold); margin-bottom: 20px;" id="unlock-title">ACCESS GRANTED</h3>
+                <p style="margin-bottom: 30px;" id="unlock-msg">You can now reach me directly.</p>
+                <div class="data-item" id="reveal-email"></div>
+                <div class="data-item" id="reveal-phone"></div>
+                <div style="margin-top: 30px;">
+                    <a href="https://www.linkedin.com/in/jalalnaveed/" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; border-bottom: 1px solid white;">Connect on LinkedIn</a>
                 </div>
-                <h3 href="#" class="isProject">Django-Ecommerce</h3>
             </div>
-            <div class="project">
-                <div class="image"
-                    style="background-image: url('./Website/assets/images/projects/masterthesisrobot.png')"></div>
-                <h3 href="#" class="isProject">RoboticsIntelligence-Webots</h3>
-            </div>
-            <div class="project row-2">
-                <div class="image"
-                    style="background-image: url('./Website/assets/images/projects/reactjsmovieapp.png')">
-                </div>
-                <h3 href="#" class="isProject">MovieInfoReactJs</h3>
-            </div>
-            <div class="project">
-                <div class="image" style="background-image: url('./Website/assets/images/projects/Snakegame.png')">
-                </div>
-                <h3 href="#" class="isProject">ESLint SnakeGame</h3>
-            </div>
-            <div class="project">
-                <div class="image" style="background-image: url('./Website/assets/images/projects/jsvirtualapp.png')">
-                </div>
-                <h3 href="#" class="isProject">A.I Notes App</h3>
-            </div>
-            <div class="project">
-                <div class="image"
-                    style="background-image: url('./Website/assets/images/projects/Mevnstackchatapp.png')">
-                </div>
-                <h3 href="#" class="isProject">MEVNStack-ChatApp</h3>
-            </div>
-            <div class="project">
-                <div class="image"
-                    style="background-image: url('./Website/assets/images/projects/LAMPStack-Chatapp.png')">
-                </div>
-                <h3 href="#" class="isProject">LAMPStack-ChatApp</h3>
-            </div>
-            <div class="project">
-                <div class="image" style="background-image: url('./Website/assets/images/projects/Djangoblog.png')">
-                </div>
-                <h3 href="#" class="isProject">Django-BlogApp</h3>
-            </div>
-        </div>
-    </section>
+        </section>
 
-
-    <section class="section" id="youtube" data-color="light">
-        <h2 class="heading">Youtube</h2>
-        <div class="description">
-            I am not just a software-developer but also a youtuber. <br>During my free time i create different youtube
-            workout videos to help other fellow developers to stay fit and healthy while coding.<br> A sound body has a
-            sound mind.<br>
-            I am currently working on staying fit while anywhere <a href="#" class="content"><b>#FitAnywhere</b>
-            </a>video series.
-        </div>
-        <div class="latest-video">
-            <a href="">
-                <img
-                     src="./Website/assets/images/youtube/youtube-thumbnail.png" 
-                     alt="Latest Youtube Video"
-                    class="thumbnail"
-                    />
-            </a>            
-            <h3>Latest Videos</h3>
-        </div>
-        <div class="channel">
-            <h3></h3>
-            <div class="yt-link">
-                <img src="./Website/assets/images/youtube/youtube-logo.png" alt="youtube" class="yt-logo" />
-                <p>Checkout my Channel <br> <strong>Nido</strong></p>
-            </div>
-        </div>
-    </section>
-  
-    <footer id="contact">
-        <div class="container">
-        <h2 class="heading">Contact </h2>
-        <p>Please contact me for any frontend related projects.</p>
-        <a href="mailto:syednaveedjalal@gmail.com" class="button">EmailMe</a>
+        <footer>
+            <p id="footer-text">&copy; 2024 Jalal Naveed. Quantum Thought Leader & AI Ethics Advocate.</p>
+        </footer>
     </div>
-    </footer>
 
-    <script src="./Website/assets/js/main.js"></script>   
-    </body>
+    <script>
+        (function () {
+            'use strict';
+
+            var config = {
+                hero: {
+                    subtitle: "AI Ethics & Privacy Advocate",
+                    title: "HUMAN-CENTRIC AI",
+                    description: "Advocating for the responsible deployment of Artificial Intelligence. I bridge the gap between Quantum Concepts and Practical AI Ethics to build a safer future.",
+                    btnText: "View My Work"
+                },
+                visionCards: [
+                    { title: "AI Ethics & Governance", text: "Advocating for responsible AI development policies. Focusing on algorithmic transparency, fairness, and the societal impact of Large Language Models." },
+                    { title: "Quantum Strategy", text: "Exploring how quantum computing will redefine data privacy and encryption standards. Preparing for the post-quantum era of cybersecurity." },
+                    { title: "Mind-Body Optimization", text: "Physical discipline fuels mental agility. As a combat sports athlete, I apply the discipline of martial arts to the focus required for deep research and content creation." }
+                ],
+                /* channelId: 24-char UC... from YouTube Studio > Channel > Advanced. Empty = link only. */
+                channels: [
+                    {
+                        key: "fitness",
+                        title: "Fitness · Health · Sports · Motivation",
+                        tagline: "Fitness, Health, Sports, Motivation",
+                        channelId: "UCNft3KKtMNVS1JLCooZWqMw",
+                        link: "https://www.youtube.com/@nidospartan",
+                        color: "var(--accent-gold)"
+                    },
+                    {
+                        key: "mamba",
+                        title: "MambaMedia",
+                        tagline: "Fitness · Health · Education · Updates",
+                        channelId: "UCk92HekgjtyBQiKVAtzPzcQ",
+                        link: "https://www.youtube.com/@mambamedia9949",
+                        color: "var(--accent-blue)"
+                    },
+                    {
+                        key: "gaming",
+                        title: "Gaming · Fun · Casual",
+                        tagline: "Noob weekend gamers, relatability",
+                        channelId: "UCjbCbxjOFMat-D_lZ8atgcg",
+                        link: "https://www.youtube.com/@SpartanNido",
+                        color: "var(--accent-purple)"
+                    },
+                    {
+                        key: "aiQuantum",
+                        title: "Latest AI & Quantum",
+                        tagline: "AI updates · Quantum updates · Education",
+                        channelId: "UCuBpaiZ4MkSQgMN_bZOs5Lg",
+                        link: "https://www.youtube.com/@Ai-Quantum-Nido",
+                        color: "var(--accent-purple)"
+                    }
+                ],
+                social: {
+                    tiktok: "https://www.tiktok.com/@nidospartan",
+                    pluralsight: "https://app.pluralsight.com/profile/jalal-syednaveed"
+                },
+                explorations: [
+                    { title: "ML & Neural Networks", text: "Exploring Ethical AI Models." },
+                    { title: "E-Commerce Logic", text: "Digital storefronts with privacy-first UX." },
+                    { title: "Robotics & Automation", text: "The future of intelligent agents." },
+                    { title: "Dynamic Interfaces", text: "Responsive, accessible web experiences." },
+                    { title: "Real-time Comms", text: "Privacy-focused chat applications." },
+                    { title: "Knowledge Management", text: "Smart tools for organizing AI research." }
+                ],
+                ui: {
+                    visionHeading: "VISION",
+                    mediaHeading: "LATEST SHORTS",
+                    mediaSub: "Shorts-focused channels — vertical feed. Latest uploads below.",
+                    explorationsHeading: "EXPLORATIONS",
+                    contactHeading: "SECURE CONNECTION",
+                    lockTitle: "Private Access",
+                    lockMsg: "To protect my privacy from automated spam bots, please complete this simple security check to reveal my contact details.",
+                    lockBtn: "Verify & Unlock",
+                    errorMsg: "Access Denied: Incorrect Answer",
+                    unlockTitle: "ACCESS GRANTED",
+                    unlockMsg: "You can now reach me directly.",
+                    footer: "&copy; 2024 Jalal Naveed. Quantum Thought Leader & AI Ethics Advocate."
+                }
+            };
+
+            var secureData = {
+                email: "c3llZG5hdmVlZGphbGFsQGdtYWlsLmNvbQ==",
+                phone: "KzM1ODQ0MzcxMDAwNQ=="
+            };
+
+            var correctAnswer = 0;
+            var attemptCount = 0;
+            var maxAttempts = 5;
+
+            function esc(s) {
+                if (s == null) return '';
+                var div = document.createElement('div');
+                div.textContent = s;
+                return div.innerHTML;
+            }
+
+            function embedUrlFromChannelId(channelId) {
+                if (!channelId || String(channelId).indexOf('UC') !== 0 || String(channelId).length !== 24) return '';
+                return 'https://www.youtube.com/embed/videoseries?list=UU' + String(channelId).slice(2);
+            }
+
+            function initContent() {
+                document.getElementById('hero-subtitle').innerText = config.hero.subtitle;
+                document.getElementById('hero-title').innerText = config.hero.title;
+                document.getElementById('hero-desc').innerText = config.hero.description;
+                document.getElementById('hero-btn').innerText = config.hero.btnText;
+
+                var visionEl = document.getElementById('vision-grid');
+                visionEl.innerHTML = '';
+                config.visionCards.forEach(function (card) {
+                    visionEl.innerHTML += '<div class="card"><h3>' + esc(card.title) + '</h3><p>' + esc(card.text) + '</p></div>';
+                });
+
+                if (document.getElementById('vision-heading')) {
+                    document.getElementById('vision-heading').innerText = config.ui.visionHeading || 'VISION';
+                }
+
+                var mediaEl = document.getElementById('media-channels-grid');
+                mediaEl.innerHTML = '';
+                config.channels.forEach(function (ch) {
+                    var embed = embedUrlFromChannelId(ch.channelId);
+                    var iframeHtml = embed
+                        ? '<div class="media-container shorts-feed"><iframe src="' + esc(embed) + '" title="' + esc(ch.title) + '" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p class="embed-fallback-hint">Player not loading? <a href="' + esc(ch.link) + '" target="_blank" rel="noopener noreferrer">Watch on YouTube →</a></p></div>'
+                        : '<div class="media-container shorts-feed channel-link-card"><a href="' + esc(ch.link) + '" target="_blank" rel="noopener noreferrer" class="channel-direct-link">Watch on YouTube →</a></div>';
+                    var taglineHtml = (ch.tagline ? '<p class="channel-tagline">' + esc(ch.tagline) + '</p>' : '');
+                    mediaEl.innerHTML +=
+                        '<div class="channel-card">' +
+                        '<h3 style="color:' + ch.color + ';">' + esc(ch.title) + '</h3>' +
+                        taglineHtml +
+                        iframeHtml +
+                        '<a href="' + esc(ch.link) + '" target="_blank" rel="noopener noreferrer" class="watch-link">Watch Full Channel →</a>' +
+                        '</div>';
+                });
+
+                var exploreEl = document.getElementById('explorations-grid');
+                exploreEl.innerHTML = '';
+                config.explorations.forEach(function (item) {
+                    exploreEl.innerHTML += '<div class="card"><h3>' + esc(item.title) + '</h3><p>' + esc(item.text) + '</p></div>';
+                });
+
+                document.getElementById('tiktok-link').href = config.social.tiktok;
+                document.getElementById('pluralsight-link').href = config.social.pluralsight;
+
+                document.getElementById('media-heading').innerText = config.ui.mediaHeading;
+                document.getElementById('media-sub').innerText = config.ui.mediaSub;
+                document.getElementById('explorations-heading').innerText = config.ui.explorationsHeading;
+                document.getElementById('contact-heading').innerText = config.ui.contactHeading;
+                document.getElementById('lock-title').innerText = config.ui.lockTitle;
+                document.getElementById('lock-msg').innerText = config.ui.lockMsg;
+                document.getElementById('lock-btn').innerText = config.ui.lockBtn;
+                document.getElementById('error-msg').innerText = config.ui.errorMsg;
+                document.getElementById('unlock-title').innerText = config.ui.unlockTitle;
+                document.getElementById('unlock-msg').innerText = config.ui.unlockMsg;
+                document.getElementById('footer-text').innerHTML = config.ui.footer;
+            }
+
+            function generateChallenge() {
+                var num1 = Math.floor(Math.random() * 12) + 1;
+                var num2 = Math.floor(Math.random() * 12) + 1;
+                correctAnswer = num1 + num2;
+                document.getElementById('math-num1').innerText = num1;
+                document.getElementById('math-num2').innerText = num2;
+            }
+
+            function unlockVault() {
+                var raw = document.getElementById('user-answer').value.trim();
+                var userAnswer = parseInt(raw, 10);
+                var lock = document.getElementById('vault-lock');
+                var unlocked = document.getElementById('vault-unlocked');
+                var errorMsg = document.getElementById('error-msg');
+                var emailContainer = document.getElementById('reveal-email');
+                var phoneContainer = document.getElementById('reveal-phone');
+
+                if (raw === '' || isNaN(userAnswer)) {
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerText = 'Please enter a number.';
+                    return;
+                }
+
+                attemptCount += 1;
+                if (attemptCount > maxAttempts) {
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerText = 'Too many attempts. Please refresh and try again later.';
+                    return;
+                }
+
+                if (userAnswer === correctAnswer) {
+                    lock.style.display = 'none';
+                    unlocked.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                    try {
+                        emailContainer.innerText = "📧 " + atob(secureData.email);
+                        phoneContainer.innerText = "📱 " + atob(secureData.phone);
+                    } catch (e) {
+                        emailContainer.innerText = "Error loading data.";
+                    }
+                } else {
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerText = config.ui.errorMsg;
+                    generateChallenge();
+                    document.getElementById('user-answer').value = '';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                initContent();
+                generateChallenge();
+
+                document.getElementById('lock-btn').addEventListener('click', unlockVault);
+                document.getElementById('user-answer').addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') unlockVault();
+                });
+            });
+
+            var bg = document.getElementById('ambient-bg');
+            var hue = 220;
+            function animateBg() {
+                hue = (hue + 0.1) % 360;
+                var adjustedHue = 220 + Math.sin(hue * 0.01) * 40;
+                bg.style.background = 'radial-gradient(circle at 50% 50%, hsl(' + adjustedHue + ', 40%, 15%) 0%, #000000 100%)';
+                requestAnimationFrame(animateBg);
+            }
+            animateBg();
+        })();
+    </script>
+</body>
 </html>
